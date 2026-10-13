@@ -1,0 +1,331 @@
+{
+  "state": {
+    "testRunDurationMs": 634.451873,
+    "isStdOutTTY": true,
+    "isStdErrTTY": true
+  },
+  "metrics": {
+    "http_req_receiving": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(95)": 0.08280419999999995,
+        "p(99)": 0.09936735999999999,
+        "min": 0.026225,
+        "avg": 0.0561120350877193,
+        "med": 0.053717,
+        "max": 0.100876,
+        "p(90)": 0.07506499999999999
+      }
+    },
+    "http_req_duration{expected_response:true}": {
+      "contains": "time",
+      "values": {
+        "p(99)": 213.78133352,
+        "min": 0.591575,
+        "avg": 75.6361868596491,
+        "med": 75.368327,
+        "max": 215.703916,
+        "p(90)": 114.05127619999999,
+        "p(95)": 118.3053268
+      },
+      "type": "trend"
+    },
+    "f10_oversell_unexpected_status": {
+      "contains": "default",
+      "values": {
+        "count": 0,
+        "rate": 0
+      },
+      "thresholds": {
+        "count == 0": {
+          "ok": true
+        }
+      },
+      "type": "counter"
+    },
+    "iterations": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "rate": 78.80818408427962,
+        "count": 50
+      }
+    },
+    "f10_oversell_201_created": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 5,
+        "rate": 7.880818408427962
+      },
+      "thresholds": {
+        "count == 5": {
+          "ok": true
+        }
+      }
+    },
+    "f10_oversell_5xx_errors": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 0,
+        "rate": 0
+      },
+      "thresholds": {
+        "count == 0": {
+          "ok": true
+        }
+      }
+    },
+    "http_req_failed": {
+      "contains": "default",
+      "values": {
+        "rate": 0,
+        "passes": 0,
+        "fails": 57
+      },
+      "type": "rate"
+    },
+    "f10_oversell_422_insufficient_stock": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 45,
+        "rate": 70.92736567585166
+      },
+      "thresholds": {
+        "count == 45": {
+          "ok": true
+        }
+      }
+    },
+    "http_req_sending": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 0.011218,
+        "avg": 0.5238537719298244,
+        "med": 0.519491,
+        "max": 1.681845,
+        "p(90)": 1.0272713999999998,
+        "p(95)": 1.4957407999999992,
+        "p(99)": 1.67879356
+      }
+    },
+    "iteration_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(95)": 116.89479659999999,
+        "p(99)": 119.37796893,
+        "min": 15.963058,
+        "avg": 77.26526552,
+        "med": 78.375044,
+        "max": 120.20315,
+        "p(90)": 113.1076283
+      }
+    },
+    "data_sent": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "count": 32580,
+        "rate": 51351.4127493166
+      }
+    },
+    "http_req_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "med": 75.368327,
+        "max": 215.703916,
+        "p(90)": 114.05127619999999,
+        "p(95)": 118.3053268,
+        "p(99)": 213.78133352,
+        "min": 0.591575,
+        "avg": 75.6361868596491
+      }
+    },
+    "http_reqs": {
+      "values": {
+        "rate": 89.84132985607877,
+        "count": 57
+      },
+      "type": "counter",
+      "contains": "default"
+    },
+    "http_req_connecting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 0,
+        "avg": 0.6402125263157896,
+        "med": 0.638059,
+        "max": 2.777763,
+        "p(90)": 1.1579304,
+        "p(95)": 1.3220636,
+        "p(99)": 1.9842637199999968
+      }
+    },
+    "http_req_tls_handshaking": {
+      "values": {
+        "p(90)": 0,
+        "p(95)": 0,
+        "p(99)": 0,
+        "min": 0,
+        "avg": 0,
+        "med": 0,
+        "max": 0
+      },
+      "type": "trend",
+      "contains": "time"
+    },
+    "f10_oversell_invariants_ok": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "rate": 1,
+        "passes": 1,
+        "fails": 0
+      },
+      "thresholds": {
+        "rate == 1.0": {
+          "ok": true
+        }
+      }
+    },
+    "data_received": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "rate": 61523.973150915415,
+        "count": 39034
+      }
+    },
+    "http_req_waiting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 0.553786,
+        "avg": 75.05622105263159,
+        "med": 75.248638,
+        "max": 215.643789,
+        "p(90)": 113.5634986,
+        "p(95)": 117.6656328,
+        "p(99)": 213.70550468
+      }
+    },
+    "checks": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "rate": 1,
+        "passes": 107,
+        "fails": 0
+      }
+    },
+    "http_req_blocked": {
+      "contains": "time",
+      "values": {
+        "min": 0.002523,
+        "avg": 0.6897809298245615,
+        "med": 0.667014,
+        "max": 3.258952,
+        "p(90)": 1.3540452,
+        "p(95)": 1.3701919999999999,
+        "p(99)": 2.2230410399999956
+      },
+      "type": "trend"
+    }
+  },
+  "setup_data": {
+    "adminToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDEiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaXNzIjoid2FyZWhvdXNlLWFwaSIsImF1ZCI6WyJ3YXJlaG91c2UtY2xpZW50cyJdLCJleHAiOjE3OTE5NTk3MTgsImlhdCI6MTc5MTg3MzMxOH0.KXB70rAzB9e9ZnS90HmXelgoPQlskxlyKjUOaEzsDak",
+    "initialBalance": 100000,
+    "initialStock": 5,
+    "product": {
+      "price": 100,
+      "stock_quantity": 5,
+      "updated_at": "2026-10-13T06:35:18.513228Z",
+      "category": "laptop",
+      "created_at": "2026-10-13T06:35:18.513228Z",
+      "id": "10017f6c-714e-494f-bb52-3891e8cc2d54",
+      "manufacturer": "Apple",
+      "model": "k6_f10_oversell_prod_ab618c7cd321"
+    },
+    "unitPrice": 100,
+    "user": {
+      "username": "k6_f10_oversell_user_73e13903f981",
+      "balance": 100000,
+      "id": "b9b9450f-1b20-4a68-a7c2-2bf6374c2a9d",
+      "password": "k6pass123!",
+      "role": "user",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiOWI5NDUwZi0xYjIwLTRhNjgtYTdjMi0yYmY2Mzc0YzJhOWQiLCJ1c2VybmFtZSI6Ims2X2YxMF9vdmVyc2VsbF91c2VyXzczZTEzOTAzZjk4MSIsInJvbGUiOiJ1c2VyIiwiaXNzIjoid2FyZWhvdXNlLWFwaSIsImF1ZCI6WyJ3YXJlaG91c2UtY2xpZW50cyJdLCJleHAiOjE3OTE5NTk3MTgsImlhdCI6MTc5MTg3MzMxOH0.X2WhlKV_fSwK1gl2eJ77h608U2VkwB_4s5OA_uYtZYw"
+    }
+  },
+  "root_group": {
+    "checks": [
+      {
+        "name": "F-10 oversell 201: status is PROCESSED",
+        "path": "::F-10 oversell 201: status is PROCESSED",
+        "id": "89254fbee146dbfd6ca0efdd61aff7ad",
+        "passes": 5,
+        "fails": 0
+      },
+      {
+        "id": "c849e08cf8eb01f784de2140a8e2217e",
+        "passes": 50,
+        "fails": 0,
+        "name": "F-10 oversell: no 500 serialization failure",
+        "path": "::F-10 oversell: no 500 serialization failure"
+      },
+      {
+        "name": "F-10 oversell: status is 201 or 422 INSUFFICIENT_STOCK",
+        "path": "::F-10 oversell: status is 201 or 422 INSUFFICIENT_STOCK",
+        "id": "33ba544016dca8b99c76386919bb7c3e",
+        "passes": 50,
+        "fails": 0
+      }
+    ],
+    "name": "",
+    "path": "",
+    "id": "d41d8cd98f00b204e9800998ecf8427e",
+    "groups": [
+      {
+        "name": "teardown",
+        "path": "::teardown",
+        "id": "a8a9942382e8ffe2e56ef29e664b8229",
+        "groups": [],
+        "checks": [
+            {
+              "path": "::teardown::F-10 Oversell Invariant: final stock_quantity == 0 (never negative)",
+              "id": "dd7fceba8225c16f0892224d919fa153",
+              "passes": 1,
+              "fails": 0,
+              "name": "F-10 Oversell Invariant: final stock_quantity == 0 (never negative)"
+            },
+            {
+              "passes": 1,
+              "fails": 0,
+              "name": "F-10 Oversell Invariant: user balance debited exactly 5 * price",
+              "path": "::teardown::F-10 Oversell Invariant: user balance debited exactly 5 * price",
+              "id": "481833510fdd4b5bcaeb19a3bbf86306"
+            }
+          ]
+      }
+    ]
+  },
+  "options": {
+    "summaryTrendStats": [
+      "min",
+      "avg",
+      "med",
+      "max",
+      "p(90)",
+      "p(95)",
+      "p(99)"
+    ],
+    "summaryTimeUnit": "",
+    "noColor": false
+  }
+}

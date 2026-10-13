@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>03 — F-10: Balance Overdraft Race (Double-Spend Check) — k6 v2.3.0 Report</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-alt: #273549;
+      --border: #334155;
+      --fg: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.14);
+      --success: #22c55e;
+      --success-soft: rgba(34, 197, 94, 0.15);
+      --danger: #ef4444;
+      --danger-soft: rgba(239, 68, 68, 0.16);
+      --warning: #f59e0b;
+      --warning-soft: rgba(245, 158, 11, 0.16);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 28px 24px 60px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.5;
+    }
+    .container { max-width: 1280px; margin: 0 auto; }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .top-nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .top-nav a:hover { text-decoration: underline; }
+    .header-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .header-title h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .header-subtitle {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .header-desc {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 820px;
+      margin: 0;
+    }
+    .status-badge {
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+    .status-pass {
+      background: var(--success-soft);
+      color: var(--success);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+    .status-fail {
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+    .status-warn {
+      background: var(--warning-soft);
+      color: var(--warning);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .kpi-label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .kpi-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--fg);
+    }
+    .kpi-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 960px) {
+      .section-grid { grid-template-columns: 1fr; }
+    }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .panel h2 {
+      margin: 0 0 16px;
+      font-size: 17px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 95px 1fr 90px;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .bar-track {
+      height: 12px;
+      background: var(--surface-alt);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      border-radius: 6px;
+    }
+    .bar-val {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      font-variant-numeric: tabular-nums;
+    }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      background: rgba(15, 23, 42, 0.4);
+    }
+    tr:last-child td { border-bottom: none; }
+    .pill {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .pill-ok { background: var(--success-soft); color: var(--success); }
+    .pill-fail { background: var(--danger-soft); color: var(--danger); }
+    .analysis-box {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+    .analysis-box h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: var(--accent);
+    }
+    code {
+      background: rgba(15, 23, 42, 0.65);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-nav">
+      <a href="index.html">← Back to Master Suite Dashboard (k6 v2.3.0)</a>
+      <span style="color: var(--muted);">Grafana k6 v2.3.0 • Warehouse REST API Testbench</span>
+    </div>
+
+    <div class="header-card">
+      <div class="header-title">
+        <div class="header-subtitle">NFT.MD • Finding F-10: Balance Overdraft Race (50 VUs vs. Balance for 3 Items)</div>
+        <h1>03 — F-10: Balance Overdraft Race (Double-Spend Check)</h1>
+        <p class="header-desc">1 User with balance: 300.00 fires 50 simultaneous POST /api/user/orders for a $100.00 product with stock_quantity: 100. Asserts 201 Created == 3, 422 INSUFFICIENT_FUNDS == 47, final balance == 0.00, and stock_quantity == 97.</p>
+      </div>
+      <div class="status-badge status-pass">
+        ✓ PASSED
+      </div>
+    </div>
+
+    
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">HTTP Requests</div>
+        <div class="kpi-value">57</div>
+        <div class="kpi-sub">90.36 req/s</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Iterations / Peak VUs</div>
+        <div class="kpi-value">50 <span style="font-size:15px;color:var(--muted)">/ 50 VUs</span></div>
+        <div class="kpi-sub">79.26 iter/s</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Latency p(95) / p(99)</div>
+        <div class="kpi-value">110.98 ms</div>
+        <div class="kpi-sub">p(99): 214.42 ms • med: 68.92 ms</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">TTFB (Waiting) med / p(95)</div>
+        <div class="kpi-value">68.85 ms</div>
+        <div class="kpi-sub">p(95): 110.87 ms • max: 215.32 ms</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Checks Pass Rate</div>
+        <div class="kpi-value">100.00%</div>
+        <div class="kpi-sub">✓ 105 / ✗ 0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Network I/O (RX / TX)</div>
+        <div class="kpi-value">38.12 KB</div>
+        <div class="kpi-sub">TX: 31.87 KB</div>
+      </div>
+    </div>
+
+    <div class="section-grid">
+      <div class="panel" style="margin-bottom:0;">
+        <h2>HTTP Response Time Distribution (http_req_duration)</h2>
+        <div class="bar-row">
+              <div style="color:var(--muted)">min</div>
+              <div class="bar-track"><div class="bar-fill" style="width:2.0%"></div></div>
+              <div class="bar-val">0.94 ms</div>
+            </div>
+<div class="bar-row">
+              <div style="color:var(--muted)">med (p50)</div>
+              <div class="bar-track"><div class="bar-fill" style="width:32.0%"></div></div>
+              <div class="bar-val">68.92 ms</div>
+            </div>
+<div class="bar-row">
+              <div style="color:var(--muted)">avg</div>
+              <div class="bar-track"><div class="bar-fill" style="width:32.6%"></div></div>
+              <div class="bar-val">70.15 ms</div>
+            </div>
+<div class="bar-row">
+              <div style="color:var(--muted)">p(90)</div>
+              <div class="bar-track"><div class="bar-fill" style="width:49.3%"></div></div>
+              <div class="bar-val">106.14 ms</div>
+            </div>
+<div class="bar-row">
+              <div style="color:var(--muted)">p(95)</div>
+              <div class="bar-track"><div class="bar-fill" style="width:51.5%"></div></div>
+              <div class="bar-val">110.98 ms</div>
+            </div>
+<div class="bar-row">
+              <div style="color:var(--muted)">p(99)</div>
+              <div class="bar-track"><div class="bar-fill" style="width:99.5%"></div></div>
+              <div class="bar-val">214.42 ms</div>
+            </div>
+<div class="bar-row">
+              <div style="color:var(--muted)">max</div>
+              <div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div>
+              <div class="bar-val">215.39 ms</div>
+            </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:0;">
+        <h2>Thresholds (5/5 Passed)</h2>
+        <table>
+                <thead>
+                  <tr><th>Metric</th><th>Threshold Expression</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                        <td><code>f10_overdraft_5xx_errors</code></td>
+                        <td><code>count == 0</code></td>
+                        <td><span class="pill pill-ok">✓ PASS</span></td>
+                      </tr>
+<tr>
+                        <td><code>f10_overdraft_unexpected_status</code></td>
+                        <td><code>count == 0</code></td>
+                        <td><span class="pill pill-ok">✓ PASS</span></td>
+                      </tr>
+<tr>
+                        <td><code>f10_overdraft_422_insufficient_funds</code></td>
+                        <td><code>count == 47</code></td>
+                        <td><span class="pill pill-ok">✓ PASS</span></td>
+                      </tr>
+<tr>
+                        <td><code>f10_overdraft_invariants_ok</code></td>
+                        <td><code>rate == 1.0</code></td>
+                        <td><span class="pill pill-ok">✓ PASS</span></td>
+                      </tr>
+<tr>
+                        <td><code>f10_overdraft_201_created</code></td>
+                        <td><code>count == 3</code></td>
+                        <td><span class="pill pill-ok">✓ PASS</span></td>
+                      </tr>
+                </tbody>
+              </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Custom Scenario Metrics</h2>
+      <table>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Type</th>
+                  <th>Value / Count</th>
+                  <th>min</th>
+                  <th>med (p50)</th>
+                  <th>avg</th>
+                  <th>p(90)</th>
+                  <th>p(95)</th>
+                  <th>p(99)</th>
+                  <th>max</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                      <td><code>f10_overdraft_5xx_errors</code></td>
+                      <td>counter</td>
+                      <td><strong>0 (0.00/s)</strong></td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                    </tr>
+<tr>
+                      <td><code>f10_overdraft_unexpected_status</code></td>
+                      <td>counter</td>
+                      <td><strong>0 (0.00/s)</strong></td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                    </tr>
+<tr>
+                      <td><code>f10_overdraft_422_insufficient_funds</code></td>
+                      <td>counter</td>
+                      <td><strong>47 (74.51/s)</strong></td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                    </tr>
+<tr>
+                      <td><code>f10_overdraft_invariants_ok</code></td>
+                      <td>rate</td>
+                      <td><strong>0.00% (✓ 1 / ✗ 0)</strong></td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                    </tr>
+<tr>
+                      <td><code>f10_overdraft_201_created</code></td>
+                      <td>counter</td>
+                      <td><strong>3 (4.76/s)</strong></td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                    </tr>
+              </tbody>
+            </table>
+    </div>
+
+    <div class="panel">
+      <h2>All Timing & Latency Metrics (Trends Breakdown)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>min (ms)</th>
+            <th>med / p50 (ms)</th>
+            <th>avg (ms)</th>
+            <th>p(90) (ms)</th>
+            <th>p(95) (ms)</th>
+            <th>p(99) (ms)</th>
+            <th>max (ms)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+                <td><code>iteration_duration</code></td>
+                <td>12.519</td>
+                <td><strong>73.566</strong></td>
+                <td>70.712</td>
+                <td>104.928</td>
+                <td><strong>108.547</strong></td>
+                <td>111.702</td>
+                <td>112.113</td>
+              </tr>
+<tr>
+                <td><code>http_req_duration</code></td>
+                <td>0.937</td>
+                <td><strong>68.924</strong></td>
+                <td>70.145</td>
+                <td>106.137</td>
+                <td><strong>110.984</strong></td>
+                <td>214.417</td>
+                <td>215.394</td>
+              </tr>
+<tr>
+                <td><code>http_req_duration{expected_response:true}</code></td>
+                <td>0.937</td>
+                <td><strong>68.924</strong></td>
+                <td>70.145</td>
+                <td>106.137</td>
+                <td><strong>110.984</strong></td>
+                <td>214.417</td>
+                <td>215.394</td>
+              </tr>
+<tr>
+                <td><code>http_req_receiving</code></td>
+                <td>0.034</td>
+                <td><strong>0.053</strong></td>
+                <td>0.059</td>
+                <td>0.080</td>
+                <td><strong>0.119</strong></td>
+                <td>0.168</td>
+                <td>0.195</td>
+              </tr>
+<tr>
+                <td><code>http_req_blocked</code></td>
+                <td>0.003</td>
+                <td><strong>0.138</strong></td>
+                <td>0.297</td>
+                <td>0.569</td>
+                <td><strong>0.777</strong></td>
+                <td>2.268</td>
+                <td>2.505</td>
+              </tr>
+<tr>
+                <td><code>http_req_connecting</code></td>
+                <td>0.000</td>
+                <td><strong>0.091</strong></td>
+                <td>0.223</td>
+                <td>0.504</td>
+                <td><strong>0.730</strong></td>
+                <td>1.408</td>
+                <td>2.050</td>
+              </tr>
+<tr>
+                <td><code>http_req_tls_handshaking</code></td>
+                <td>0.000</td>
+                <td><strong>0.000</strong></td>
+                <td>0.000</td>
+                <td>0.000</td>
+                <td><strong>0.000</strong></td>
+                <td>0.000</td>
+                <td>0.000</td>
+              </tr>
+<tr>
+                <td><code>http_req_sending</code></td>
+                <td>0.011</td>
+                <td><strong>0.064</strong></td>
+                <td>0.125</td>
+                <td>0.269</td>
+                <td><strong>0.297</strong></td>
+                <td>0.849</td>
+                <td>1.518</td>
+              </tr>
+<tr>
+                <td><code>http_req_waiting</code></td>
+                <td>0.864</td>
+                <td><strong>68.847</strong></td>
+                <td>69.961</td>
+                <td>106.016</td>
+                <td><strong>110.868</strong></td>
+                <td>214.311</td>
+                <td>215.321</td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h2>Checks Breakdown (105 Passed / 0 Failed)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Check Name</th>
+            <th>Passes</th>
+            <th>Fails</th>
+            <th>Pass Rate</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+                <td style="color:var(--muted)">root</td>
+                <td>F-10 overdraft 201: status is PROCESSED</td>
+                <td>3</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+<tr>
+                <td style="color:var(--muted)">root</td>
+                <td>F-10 overdraft: no 500 error</td>
+                <td>50</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+<tr>
+                <td style="color:var(--muted)">root</td>
+                <td>F-10 overdraft: status is 201 or 422 INSUFFICIENT_FUNDS</td>
+                <td>50</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+<tr>
+                <td style="color:var(--muted)">teardown</td>
+                <td>F-10 Overdraft Invariant: final balance == 0.00 (never negative)</td>
+                <td>1</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+<tr>
+                <td style="color:var(--muted)">teardown</td>
+                <td>F-10 Overdraft Invariant: final stock_quantity == 97</td>
+                <td>1</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

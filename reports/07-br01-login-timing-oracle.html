@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>07 — BR-01a: Timing Side-Channel Check (Login Timing Oracle) — k6 v2.3.0 Report</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-alt: #273549;
+      --border: #334155;
+      --fg: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.14);
+      --success: #22c55e;
+      --success-soft: rgba(34, 197, 94, 0.15);
+      --danger: #ef4444;
+      --danger-soft: rgba(239, 68, 68, 0.16);
+      --warning: #f59e0b;
+      --warning-soft: rgba(245, 158, 11, 0.16);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 28px 24px 60px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.5;
+    }
+    .container { max-width: 1280px; margin: 0 auto; }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .top-nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .top-nav a:hover { text-decoration: underline; }
+    .header-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .header-title h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .header-subtitle {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .header-desc {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 820px;
+      margin: 0;
+    }
+    .status-badge {
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+    .status-pass {
+      background: var(--success-soft);
+      color: var(--success);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+    .status-fail {
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+    .status-warn {
+      background: var(--warning-soft);
+      color: var(--warning);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .kpi-label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .kpi-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--fg);
+    }
+    .kpi-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 960px) {
+      .section-grid { grid-template-columns: 1fr; }
+    }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .panel h2 {
+      margin: 0 0 16px;
+      font-size: 17px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 95px 1fr 90px;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .bar-track {
+      height: 12px;
+      background: var(--surface-alt);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      border-radius: 6px;
+    }
+    .bar-val {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      font-variant-numeric: tabular-nums;
+    }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      background: rgba(15, 23, 42, 0.4);
+    }
+    tr:last-child td { border-bottom: none; }
+    .pill {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .pill-ok { background: var(--success-soft); color: var(--success); }
+    .pill-fail { background: var(--danger-soft); color: var(--danger); }
+    .analysis-box {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+    .analysis-box h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: var(--accent);
+    }
+    code {
+      background: rgba(15, 23, 42, 0.65);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-nav">
+      <a href="index.html">← Back to Master Suite Dashboard (k6 v2.3.0)</a>
+      <span style="color: var(--muted);">Grafana k6 v2.3.0 • Warehouse REST API Testbench</span>
+    </div>
+
+    <div class="header-card">
+      <div class="header-title">
+        <div class="header-subtitle">NFT.MD • Finding BR-01: Timing Oracle Check (Existing vs. Non-Existent Username)</div>
+        <h1>07 — BR-01a: Timing Side-Channel Check (Login Timing Oracle)</h1>
+        <p class="header-desc">Compares k6 http_req_waiting (p50/p95) distributions on POST /api/user/login between an existing username (wrong password) and a non-existent username to validate constant-time dummy bcrypt hashing.</p>
+      </div>
+      <div class="status-badge status-fail">
+        ✗ FAILED / DETECTED
+      </div>
+    </div>
+
+    
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">HTTP Requests</div>
+        <div class="kpi-value">34</div>
+        <div class="kpi-sub">20.64 req/s</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Iterations / Peak VUs</div>
+        <div class="kpi-value">30 <span style="font-size:15px;color:var(--muted)">/ 6 VUs</span></div>
+        <div class="kpi-sub">18.21 iter/s</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Latency p(95) / p(99)</div>
+        <div class="kpi-value">239.01 ms</div>
+        <div class="kpi-sub">p(99): 242.20 ms • med: 140.06 ms</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">TTFB (Waiting) med / p(95)</div>
+        <div class="kpi-value">139.97 ms</div>
+        <div class="kpi-sub">p(95): 238.90 ms • max: 243.08 ms</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Checks Pass Rate</div>
+        <div class="kpi-value">100.00%</div>
+        <div class="kpi-sub">✓ 150 / ✗ 0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Network I/O (RX / TX)</div>
+        <div class="kpi-value">11.94 KB</div>
+        <div class="kpi-sub">TX: 8.78 KB</div>
+      </div>
+    </div>
+
+    <div class="section-grid">
+      <div class="panel" style="margin-bottom:0;">
+        <h2>HTTP Response Time Distribution (http_req_duration)</h2>
+        <div class="bar-row">
+              <div style="color:var(--muted)">min</div>
+              <div class="bar-track"><div class="bar-fill" style="width:2.0%"></div></div>
+              <div class="bar-val">1.95 ms</div>
+            </div>
+<div class="bar-row">
+              <div style="color:var(--muted)">med (p50)</div>
+              <div class="bar-track"><div class="bar-fill" style="width:57.6%"></div></div>
+              <div class="bar-val">140.06 ms</div>
+            </div>
+<div class="bar-row">
+              <div style="color:var(--muted)">avg</div>
+              <div class="bar-track"><div class="bar-fill" style="width:58.4%"></div></div>
+              <div class="bar-val">142.09 ms</div>
+            </div>
+<div class="bar-row">
+              <div style="color:var(--muted)">p(90)</div>
+              <div class="bar-track"><div class="bar-fill" style="width:93.4%"></div></div>
+              <div class="bar-val">227.20 ms</div>
+            </div>
+<div class="bar-row">
+              <div style="color:var(--muted)">p(95)</div>
+              <div class="bar-track"><div class="bar-fill" style="width:98.3%"></div></div>
+              <div class="bar-val">239.01 ms</div>
+            </div>
+<div class="bar-row">
+              <div style="color:var(--muted)">p(99)</div>
+              <div class="bar-track"><div class="bar-fill" style="width:99.6%"></div></div>
+              <div class="bar-val">242.20 ms</div>
+            </div>
+<div class="bar-row">
+              <div style="color:var(--muted)">max</div>
+              <div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div>
+              <div class="bar-val">243.17 ms</div>
+            </div>
+      </div>
+
+      <div class="panel" style="margin-bottom:0;">
+        <h2>Thresholds (3/4 Passed)</h2>
+        <table>
+                <thead>
+                  <tr><th>Metric</th><th>Threshold Expression</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                        <td><code>br01_login_waiting_nonexistent_user</code></td>
+                        <td><code>med &gt;= 180</code></td>
+                        <td><span class="pill pill-fail">✗ FAIL</span></td>
+                      </tr>
+<tr>
+                        <td><code>br01_uniform_401_response_rate</code></td>
+                        <td><code>rate == 1.0</code></td>
+                        <td><span class="pill pill-ok">✓ PASS</span></td>
+                      </tr>
+<tr>
+                        <td><code>br01_login_waiting_existing_user</code></td>
+                        <td><code>med &gt; 20</code></td>
+                        <td><span class="pill pill-ok">✓ PASS</span></td>
+                      </tr>
+<tr>
+                        <td><code>br01_timing_5xx_errors</code></td>
+                        <td><code>count == 0</code></td>
+                        <td><span class="pill pill-ok">✓ PASS</span></td>
+                      </tr>
+                </tbody>
+              </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Custom Scenario Metrics</h2>
+      <table>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Type</th>
+                  <th>Value / Count</th>
+                  <th>min</th>
+                  <th>med (p50)</th>
+                  <th>avg</th>
+                  <th>p(90)</th>
+                  <th>p(95)</th>
+                  <th>p(99)</th>
+                  <th>max</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                      <td><code>br01_login_waiting_nonexistent_user</code></td>
+                      <td>trend</td>
+                      <td><strong>—</strong></td>
+                      <td>60.81</td>
+                      <td>63.09</td>
+                      <td>62.79</td>
+                      <td>63.53</td>
+                      <td>63.86</td>
+                      <td>64.19</td>
+                      <td>64.28</td>
+                    </tr>
+<tr>
+                      <td><code>br01_uniform_401_response_rate</code></td>
+                      <td>rate</td>
+                      <td><strong>0.00% (✓ 30 / ✗ 0)</strong></td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                    </tr>
+<tr>
+                      <td><code>br01_login_waiting_existing_user</code></td>
+                      <td>trend</td>
+                      <td><strong>—</strong></td>
+                      <td>219.80</td>
+                      <td>221.73</td>
+                      <td>225.61</td>
+                      <td>239.39</td>
+                      <td>241.04</td>
+                      <td>242.67</td>
+                      <td>243.08</td>
+                    </tr>
+<tr>
+                      <td><code>br01_timing_5xx_errors</code></td>
+                      <td>counter</td>
+                      <td><strong>0 (0.00/s)</strong></td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                      <td>—</td>
+                    </tr>
+              </tbody>
+            </table>
+    </div>
+
+    <div class="panel">
+      <h2>All Timing & Latency Metrics (Trends Breakdown)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>min (ms)</th>
+            <th>med / p50 (ms)</th>
+            <th>avg (ms)</th>
+            <th>p(90) (ms)</th>
+            <th>p(95) (ms)</th>
+            <th>p(99) (ms)</th>
+            <th>max (ms)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+                <td><code>http_req_sending</code></td>
+                <td>0.010</td>
+                <td><strong>0.015</strong></td>
+                <td>0.020</td>
+                <td>0.044</td>
+                <td><strong>0.058</strong></td>
+                <td>0.059</td>
+                <td>0.059</td>
+              </tr>
+<tr>
+                <td><code>http_req_receiving</code></td>
+                <td>0.025</td>
+                <td><strong>0.044</strong></td>
+                <td>0.049</td>
+                <td>0.070</td>
+                <td><strong>0.073</strong></td>
+                <td>0.092</td>
+                <td>0.099</td>
+              </tr>
+<tr>
+                <td><code>http_req_tls_handshaking</code></td>
+                <td>0.000</td>
+                <td><strong>0.000</strong></td>
+                <td>0.000</td>
+                <td>0.000</td>
+                <td><strong>0.000</strong></td>
+                <td>0.000</td>
+                <td>0.000</td>
+              </tr>
+<tr>
+                <td><code>http_req_duration</code></td>
+                <td>1.951</td>
+                <td><strong>140.062</strong></td>
+                <td>142.092</td>
+                <td>227.198</td>
+                <td><strong>239.009</strong></td>
+                <td>242.203</td>
+                <td>243.171</td>
+              </tr>
+<tr>
+                <td><code>http_req_waiting</code></td>
+                <td>1.882</td>
+                <td><strong>139.965</strong></td>
+                <td>142.023</td>
+                <td>227.142</td>
+                <td><strong>238.899</strong></td>
+                <td>242.120</td>
+                <td>243.080</td>
+              </tr>
+<tr>
+                <td><code>http_req_blocked</code></td>
+                <td>0.002</td>
+                <td><strong>0.003</strong></td>
+                <td>0.132</td>
+                <td>0.642</td>
+                <td><strong>0.773</strong></td>
+                <td>0.804</td>
+                <td>0.811</td>
+              </tr>
+<tr>
+                <td><code>br01_login_waiting_nonexistent_user</code></td>
+                <td>60.810</td>
+                <td><strong>63.088</strong></td>
+                <td>62.792</td>
+                <td>63.532</td>
+                <td><strong>63.860</strong></td>
+                <td>64.193</td>
+                <td>64.276</td>
+              </tr>
+<tr>
+                <td><code>http_req_connecting</code></td>
+                <td>0.000</td>
+                <td><strong>0.000</strong></td>
+                <td>0.101</td>
+                <td>0.402</td>
+                <td><strong>0.726</strong></td>
+                <td>0.762</td>
+                <td>0.772</td>
+              </tr>
+<tr>
+                <td><code>br01_login_waiting_existing_user</code></td>
+                <td>219.799</td>
+                <td><strong>221.732</strong></td>
+                <td>225.609</td>
+                <td>239.388</td>
+                <td><strong>241.044</strong></td>
+                <td>242.673</td>
+                <td>243.080</td>
+              </tr>
+<tr>
+                <td><code>http_req_duration{expected_response:true}</code></td>
+                <td>1.951</td>
+                <td><strong>140.062</strong></td>
+                <td>142.092</td>
+                <td>227.198</td>
+                <td><strong>239.009</strong></td>
+                <td>242.203</td>
+                <td>243.171</td>
+              </tr>
+<tr>
+                <td><code>iteration_duration</code></td>
+                <td>61.047</td>
+                <td><strong>142.629</strong></td>
+                <td>144.608</td>
+                <td>229.398</td>
+                <td><strong>240.390</strong></td>
+                <td>243.338</td>
+                <td>244.210</td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h2>Checks Breakdown (150 Passed / 0 Failed)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Check Name</th>
+            <th>Passes</th>
+            <th>Fails</th>
+            <th>Pass Rate</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+                <td style="color:var(--muted)">root</td>
+                <td>BR-01 non-existent user wrong password: status is 401</td>
+                <td>15</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+<tr>
+                <td style="color:var(--muted)">root</td>
+                <td>BR-01 non-existent user wrong password: success is false</td>
+                <td>15</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+<tr>
+                <td style="color:var(--muted)">root</td>
+                <td>BR-01 non-existent user wrong password: error object present</td>
+                <td>15</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+<tr>
+                <td style="color:var(--muted)">root</td>
+                <td>BR-01 non-existent user wrong password: requestId in error envelope</td>
+                <td>15</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+<tr>
+                <td style="color:var(--muted)">root</td>
+                <td>BR-01 non-existent user wrong password: error.code is INVALID_CREDENTIALS</td>
+                <td>15</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+<tr>
+                <td style="color:var(--muted)">root</td>
+                <td>BR-01 existing user wrong password: status is 401</td>
+                <td>15</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+<tr>
+                <td style="color:var(--muted)">root</td>
+                <td>BR-01 existing user wrong password: success is false</td>
+                <td>15</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+<tr>
+                <td style="color:var(--muted)">root</td>
+                <td>BR-01 existing user wrong password: error object present</td>
+                <td>15</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+<tr>
+                <td style="color:var(--muted)">root</td>
+                <td>BR-01 existing user wrong password: requestId in error envelope</td>
+                <td>15</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+<tr>
+                <td style="color:var(--muted)">root</td>
+                <td>BR-01 existing user wrong password: error.code is INVALID_CREDENTIALS</td>
+                <td>15</td>
+                <td>0</td>
+                <td>100.0%</td>
+                <td><span class="pill pill-ok">✓ PASS</span></td>
+              </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

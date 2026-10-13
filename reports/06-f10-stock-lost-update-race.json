@@ -1,0 +1,301 @@
+{
+  "root_group": {
+    "name": "",
+    "path": "",
+    "id": "d41d8cd98f00b204e9800998ecf8427e",
+    "groups": [
+      {
+        "groups": [],
+        "checks": [
+            {
+              "name": "F-10 Lost-Update Invariant: 0 order decrements overwritten by concurrent PATCH /stock",
+              "path": "::teardown::F-10 Lost-Update Invariant: 0 order decrements overwritten by concurrent PATCH /stock",
+              "id": "386998b42b778b19fcd6ef8a965f8b8e",
+              "passes": 0,
+              "fails": 1
+            }
+          ],
+        "name": "teardown",
+        "path": "::teardown",
+        "id": "a8a9942382e8ffe2e56ef29e664b8229"
+      }
+    ],
+    "checks": [
+      {
+        "name": "F-10 lost-update user order: status is 201 or 422",
+        "path": "::F-10 lost-update user order: status is 201 or 422",
+        "id": "3aa33f95bf0a3af41f1e558ab6618f26",
+        "passes": 40,
+        "fails": 0
+      },
+      {
+        "name": "F-10 lost-update admin PATCH stock: status is 200",
+        "path": "::F-10 lost-update admin PATCH stock: status is 200",
+        "id": "15fc58227633c18e9d454a9e8a322779",
+        "passes": 6,
+        "fails": 0
+      }
+    ]
+  },
+  "options": {
+    "summaryTimeUnit": "",
+    "noColor": false,
+    "summaryTrendStats": [
+      "min",
+      "avg",
+      "med",
+      "max",
+      "p(90)",
+      "p(95)",
+      "p(99)"
+    ]
+  },
+  "state": {
+    "isStdOutTTY": true,
+    "isStdErrTTY": true,
+    "testRunDurationMs": 628.332071
+  },
+  "metrics": {
+    "http_req_receiving": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(99)": 0.09677835999999994,
+        "min": 0.030517,
+        "avg": 0.05543977358490566,
+        "med": 0.051099,
+        "max": 0.107221,
+        "p(90)": 0.08513480000000001,
+        "p(95)": 0.08649079999999999
+      }
+    },
+    "data_sent": {
+      "contains": "data",
+      "values": {
+        "count": 29970,
+        "rate": 47697.708557677615
+      },
+      "type": "counter"
+    },
+    "http_req_blocked": {
+      "contains": "time",
+      "values": {
+        "min": 0.002835,
+        "avg": 0.19083996226415095,
+        "med": 0.004799,
+        "max": 1.782878,
+        "p(90)": 0.630182200000001,
+        "p(95)": 0.8672011999999998,
+        "p(99)": 1.4192763199999978
+      },
+      "type": "trend"
+    },
+    "http_req_duration{expected_response:true}": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 1.363857,
+        "avg": 42.3961551509434,
+        "med": 42.875916,
+        "max": 217.715598,
+        "p(90)": 64.1381544,
+        "p(95)": 70.8641942,
+        "p(99)": 215.20426683999997
+      }
+    },
+    "checks": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "rate": 0.9787234042553191,
+        "passes": 46,
+        "fails": 1
+      }
+    },
+    "iteration_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 39.82915904347827,
+        "med": 43.706774499999995,
+        "max": 73.870275,
+        "p(90)": 60.3764825,
+        "p(95)": 66.8120525,
+        "p(99)": 72.6706785,
+        "min": 5.414221
+      }
+    },
+    "http_req_duration": {
+      "values": {
+        "med": 42.875916,
+        "max": 217.715598,
+        "p(90)": 64.1381544,
+        "p(95)": 70.8641942,
+        "p(99)": 215.20426683999997,
+        "min": 1.363857,
+        "avg": 42.3961551509434
+      },
+      "type": "trend",
+      "contains": "time"
+    },
+    "f10_lost_update_overwritten_units": {
+      "type": "gauge",
+      "contains": "default",
+      "values": {
+        "value": 12,
+        "min": 12,
+        "max": 12
+      },
+      "thresholds": {
+        "value == 0": {
+          "ok": false
+        }
+      }
+    },
+    "f10_lost_update_5xx_errors": {
+      "contains": "default",
+      "values": {
+        "count": 0,
+        "rate": 0
+      },
+      "thresholds": {
+        "count == 0": {
+          "ok": true
+        }
+      },
+      "type": "counter"
+    },
+    "http_reqs": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "rate": 84.35030208731777,
+        "count": 53
+      }
+    },
+    "http_req_waiting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 1.301961,
+        "avg": 42.28639266037736,
+        "med": 42.681889,
+        "max": 217.59342,
+        "p(90)": 64.0244236,
+        "p(95)": 70.6397208,
+        "p(99)": 215.11195088
+      }
+    },
+    "f10_lost_update_purchases_201": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 40,
+        "rate": 63.66060534891908
+      },
+      "thresholds": {
+        "count > 0": {
+          "ok": true
+        }
+      }
+    },
+    "f10_lost_update_admin_patches_200": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 6,
+        "rate": 9.549090802337862
+      },
+      "thresholds": {
+        "count > 0": {
+          "ok": true
+        }
+      }
+    },
+    "http_req_connecting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(99)": 1.3262955599999975,
+        "min": 0,
+        "avg": 0.14088484905660378,
+        "med": 0,
+        "max": 1.742671,
+        "p(90)": 0.3306564000000001,
+        "p(95)": 0.7489436
+      }
+    },
+    "http_req_sending": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 0.011146,
+        "avg": 0.05432271698113207,
+        "med": 0.024283,
+        "max": 0.312341,
+        "p(90)": 0.14399960000000012,
+        "p(95)": 0.19188279999999996,
+        "p(99)": 0.28604927999999985
+      }
+    },
+    "http_req_failed": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "rate": 0,
+        "passes": 0,
+        "fails": 53
+      }
+    },
+    "http_req_tls_handshaking": {
+      "values": {
+        "p(99)": 0,
+        "min": 0,
+        "avg": 0,
+        "med": 0,
+        "max": 0,
+        "p(90)": 0,
+        "p(95)": 0
+      },
+      "type": "trend",
+      "contains": "time"
+    },
+    "iterations": {
+      "contains": "default",
+      "values": {
+        "count": 46,
+        "rate": 73.20969615125694
+      },
+      "type": "counter"
+    },
+    "data_received": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "count": 59533,
+        "rate": 94747.67045592998
+      }
+    }
+  },
+  "setup_data": {
+    "adminToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDEiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaXNzIjoid2FyZWhvdXNlLWFwaSIsImF1ZCI6WyJ3YXJlaG91c2UtY2xpZW50cyJdLCJleHAiOjE3OTE5NTk3NDMsImlhdCI6MTc5MTg3MzM0M30.x5V6unPSsr2Ac-uL3YdDTtzv8ZN4pvZ4tCqgNFVJd28",
+    "product": {
+      "manufacturer": "Dell",
+      "model": "k6_f10_lostupd_prod_eda8a5888be1",
+      "price": 10,
+      "stock_quantity": 50,
+      "updated_at": "2026-10-13T06:35:43.156052Z",
+      "category": "laptop",
+      "created_at": "2026-10-13T06:35:43.156052Z",
+      "id": "88f47a9e-8356-4acc-8974-d93c9c9cc6b1"
+    },
+    "user": {
+      "balance": 100000,
+      "id": "c9fc9691-b9cb-44d1-a4f8-be23ee36fcee",
+      "password": "k6pass123!",
+      "role": "user",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjOWZjOTY5MS1iOWNiLTQ0ZDEtYTRmOC1iZTIzZWUzNmZjZWUiLCJ1c2VybmFtZSI6Ims2X2YxMF9sb3N0dXBkX3VzZXJfN2IyMTNmYTA1ZTBhIiwicm9sZSI6InVzZXIiLCJpc3MiOiJ3YXJlaG91c2UtYXBpIiwiYXVkIjpbIndhcmVob3VzZS1jbGllbnRzIl0sImV4cCI6MTc5MTk1OTc0MywiaWF0IjoxNzkxODczMzQzfQ.0WyB4fDD17gBUVjSbG2BASYqrX-pEJ_-TfXNQ_PfS-A",
+      "username": "k6_f10_lostupd_user_7b213fa05e0a"
+    }
+  }
+}

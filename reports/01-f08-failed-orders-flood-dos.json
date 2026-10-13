@@ -1,0 +1,464 @@
+{
+  "metrics": {
+    "iterations": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "rate": 584.9279703148018,
+        "count": 18365
+      }
+    },
+    "f08_server_5xx_errors": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 0,
+        "rate": 0
+      },
+      "thresholds": {
+        "count == 0": {
+          "ok": true
+        }
+      }
+    },
+    "checks": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "fails": 0,
+        "rate": 1,
+        "passes": 93268
+      }
+    },
+    "http_req_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "max": 218.516245,
+        "p(90)": 42.50064,
+        "p(95)": 46.906006,
+        "p(99)": 71.09114620000007,
+        "min": 1.508652,
+        "avg": 33.56104249922294,
+        "med": 30.906701
+      }
+    },
+    "http_req_tls_handshaking": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(99)": 0,
+        "min": 0,
+        "avg": 0,
+        "med": 0,
+        "max": 0,
+        "p(90)": 0,
+        "p(95)": 0
+      }
+    },
+    "data_sent": {
+      "values": {
+        "rate": 343735.78030628746,
+        "count": 10792282
+      },
+      "type": "counter",
+      "contains": "data"
+    },
+    "data_received": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "count": 1335233335,
+        "rate": 42527379.50112789
+      }
+    },
+    "http_req_duration{expected_response:true}": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 1.508652,
+        "avg": 33.56104249922294,
+        "med": 30.906701,
+        "max": 218.516245,
+        "p(90)": 42.50064,
+        "p(95)": 46.906006,
+        "p(99)": 71.09114620000007
+      }
+    },
+    "f08_user_orders_poll_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(99)": 143.6245572299999,
+        "min": 1.508652,
+        "avg": 50.59488173611113,
+        "med": 41.7879075,
+        "max": 169.217626,
+        "p(90)": 101.36645630000001,
+        "p(95)": 112.00194264999999
+      },
+      "thresholds": {
+        "p(95) < 500": {
+          "ok": true
+        }
+      }
+    },
+    "http_req_waiting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(90)": 42.400614,
+        "p(95)": 46.776084,
+        "p(99)": 69.72801820000113,
+        "min": 1.360396,
+        "avg": 33.43745003006278,
+        "med": 30.837897,
+        "max": 218.452564
+      }
+    },
+    "f08_orders_payload_bytes": {
+      "type": "trend",
+      "contains": "default",
+      "values": {
+        "p(90)": 4714775.5,
+        "p(95)": 5133510.25,
+        "p(99)": 5496208.5,
+        "min": 78,
+        "avg": 2297093.2118055555,
+        "med": 2046834,
+        "max": 5615398
+      }
+    },
+    "http_req_failed": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "rate": 0,
+        "passes": 0,
+        "fails": 18661
+      }
+    },
+    "http_req_receiving": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(95)": 0.105308,
+        "p(99)": 2.189333200000002,
+        "min": 0.022949,
+        "avg": 0.10598216778307724,
+        "med": 0.044905,
+        "max": 20.253972,
+        "p(90)": 0.070957
+      }
+    },
+    "f08_failed_orders_recorded_422": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 18077,
+        "rate": 575.7551276548146
+      }
+    },
+    "iteration_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 2.560005,
+        "avg": 39.319766087394456,
+        "med": 31.169997,
+        "max": 883.757266,
+        "p(90)": 42.865807200000006,
+        "p(95)": 47.293383,
+        "p(99)": 331.53028944000073
+      }
+    },
+    "vus_max": {
+      "contains": "default",
+      "values": {
+        "value": 24,
+        "min": 24,
+        "max": 24
+      },
+      "type": "gauge"
+    },
+    "http_req_sending": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 0.005743,
+        "avg": 0.017610301377203808,
+        "med": 0.016226,
+        "max": 1.515141,
+        "p(90)": 0.022223,
+        "p(95)": 0.0255,
+        "p(99)": 0.03802060000000012
+      }
+    },
+    "f08_admin_orders_poll_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 2.809191,
+        "avg": 51.573011243055554,
+        "med": 46.120380499999996,
+        "max": 164.66374,
+        "p(90)": 101.51926180000001,
+        "p(95)": 110.89841955,
+        "p(99)": 140.43940699
+      },
+      "thresholds": {
+        "p(95) < 500": {
+          "ok": true
+        }
+      }
+    },
+    "f08_zero_cost_invariant_ok": {
+      "contains": "default",
+      "values": {
+        "rate": 1,
+        "passes": 1,
+        "fails": 0
+      },
+      "thresholds": {
+        "rate == 1.0": {
+          "ok": true
+        }
+      },
+      "type": "rate"
+    },
+    "vus": {
+      "type": "gauge",
+      "contains": "default",
+      "values": {
+        "value": 3,
+        "min": 3,
+        "max": 24
+      }
+    },
+    "http_reqs": {
+      "contains": "default",
+      "values": {
+        "count": 18661,
+        "rate": 594.3556141597885
+      },
+      "type": "counter"
+    },
+    "http_req_blocked": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 0.002102,
+        "avg": 0.004942632120465119,
+        "med": 0.003909,
+        "max": 2.191065,
+        "p(90)": 0.005474,
+        "p(95)": 0.00633,
+        "p(99)": 0.011071
+      }
+    },
+    "http_req_connecting": {
+      "contains": "time",
+      "values": {
+        "min": 0,
+        "avg": 0.0004412578104067307,
+        "med": 0,
+        "max": 1.803868,
+        "p(90)": 0,
+        "p(95)": 0,
+        "p(99)": 0
+      },
+      "type": "trend"
+    }
+  },
+  "setup_data": {
+    "adminToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDEiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaXNzIjoid2FyZWhvdXNlLWFwaSIsImF1ZCI6WyJ3YXJlaG91c2UtY2xpZW50cyJdLCJleHAiOjE3OTE5NTk2ODYsImlhdCI6MTc5MTg3MzI4Nn0.1ll3dGqjjnQb7-8ouMNWWPsRAP0y0nHtpO9e9iNdduk",
+    "initialBalance": 10,
+    "initialStock": 2,
+    "product": {
+      "stock_quantity": 2,
+      "updated_at": "2026-10-13T06:34:46.104566Z",
+      "category": "laptop",
+      "created_at": "2026-10-13T06:34:46.104566Z",
+      "id": "eb519944-b75d-4b81-9909-2d44ee816cdc",
+      "manufacturer": "Dell",
+      "model": "k6_f08_prod_26a7ffcb1b43",
+      "price": 500
+    },
+    "user": {
+      "username": "k6_f08_flooder_5307d469bbed",
+      "balance": 10,
+      "id": "96f8ec01-b2f7-4890-ac83-b747e385d25b",
+      "password": "k6pass123!",
+      "role": "user",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5NmY4ZWMwMS1iMmY3LTQ4OTAtYWM4My1iNzQ3ZTM4NWQyNWIiLCJ1c2VybmFtZSI6Ims2X2YwOF9mbG9vZGVyXzUzMDdkNDY5YmJlZCIsInJvbGUiOiJ1c2VyIiwiaXNzIjoid2FyZWhvdXNlLWFwaSIsImF1ZCI6WyJ3YXJlaG91c2UtY2xpZW50cyJdLCJleHAiOjE3OTE5NTk2ODYsImlhdCI6MTc5MTg3MzI4Nn0.MoFCCtwRc_gC9pm-X-GjRj2U2AW8FD80mLY6RWmNYJw"
+    }
+  },
+  "root_group": {
+    "groups": [
+      {
+        "checks": [
+          {
+            "fails": 0,
+            "name": "F-08 Invariant: FAILED order flood cost $0.00 user balance",
+            "path": "::teardown::F-08 Invariant: FAILED order flood cost $0.00 user balance",
+            "id": "7d28c063ddf4d84f9a7c0dc4096b2bcd",
+            "passes": 1
+          },
+          {
+            "passes": 1,
+            "fails": 0,
+            "name": "F-08 Invariant: FAILED order flood consumed 0 product stock",
+            "path": "::teardown::F-08 Invariant: FAILED order flood consumed 0 product stock",
+            "id": "94daf96cc5814bf4f6facf6ac012ddec"
+          },
+          {
+            "name": "F-08 Audit: FAILED orders persisted in unpaginated order history",
+            "path": "::teardown::F-08 Audit: FAILED orders persisted in unpaginated order history",
+            "id": "28caeb12c376e8b66470bbf97db0ad2e",
+            "passes": 1,
+            "fails": 0
+          }
+        ],
+        "name": "teardown",
+        "path": "::teardown",
+        "id": "a8a9942382e8ffe2e56ef29e664b8229",
+        "groups": []
+      }
+    ],
+    "checks": [
+      {
+        "name": "F-08 poll GET /api/user/orders: status is 200",
+        "path": "::F-08 poll GET /api/user/orders: status is 200",
+        "id": "d6ee7a8bef4672f3bd335ca0c2483aaa",
+        "passes": 288,
+        "fails": 0
+      },
+      {
+        "name": "F-08 poll GET /api/user/orders: success is true",
+        "path": "::F-08 poll GET /api/user/orders: success is true",
+        "id": "6c44126a147b1d031faac21ab30f5cb6",
+        "passes": 288,
+        "fails": 0
+      },
+      {
+        "id": "970f7884bd298dc0bb8b8d26f6c230f7",
+        "passes": 288,
+        "fails": 0,
+        "name": "F-08 poll GET /api/user/orders: data payload present",
+        "path": "::F-08 poll GET /api/user/orders: data payload present"
+      },
+      {
+        "passes": 288,
+        "fails": 0,
+        "name": "F-08 poll GET /api/user/orders: requestId in envelope",
+        "path": "::F-08 poll GET /api/user/orders: requestId in envelope",
+        "id": "a2223096d6a2b0b0a10984da41c2c987"
+      },
+      {
+        "fails": 0,
+        "name": "F-08 poll GET /api/user/orders: X-Request-ID header present",
+        "path": "::F-08 poll GET /api/user/orders: X-Request-ID header present",
+        "id": "02da419f32de441207dbb185b2707254",
+        "passes": 288
+      },
+      {
+        "name": "F-08 poll GET /api/admin/orders: status is 200",
+        "path": "::F-08 poll GET /api/admin/orders: status is 200",
+        "id": "ddb228d6906dc9db62d1130d4bf7edba",
+        "passes": 288,
+        "fails": 0
+      },
+      {
+        "name": "F-08 poll GET /api/admin/orders: success is true",
+        "path": "::F-08 poll GET /api/admin/orders: success is true",
+        "id": "8c54a8e313bc5efddfebdecfc7e08ebb",
+        "passes": 288,
+        "fails": 0
+      },
+      {
+        "name": "F-08 poll GET /api/admin/orders: data payload present",
+        "path": "::F-08 poll GET /api/admin/orders: data payload present",
+        "id": "8fb1e4ce8985e27efb806bd00361fd9c",
+        "passes": 288,
+        "fails": 0
+      },
+      {
+        "passes": 288,
+        "fails": 0,
+        "name": "F-08 poll GET /api/admin/orders: requestId in envelope",
+        "path": "::F-08 poll GET /api/admin/orders: requestId in envelope",
+        "id": "f0a1922c930fcf815534ef7cd10ac491"
+      },
+      {
+        "name": "F-08 poll GET /api/admin/orders: X-Request-ID header present",
+        "path": "::F-08 poll GET /api/admin/orders: X-Request-ID header present",
+        "id": "2c1d37ff38028caaa475396efe8406e4",
+        "passes": 288,
+        "fails": 0
+      },
+      {
+        "passes": 18077,
+        "fails": 0,
+        "name": "F-08 flood POST /api/user/orders: status is 422",
+        "path": "::F-08 flood POST /api/user/orders: status is 422",
+        "id": "09456980c99fbd039c09ab31d6db484b"
+      },
+      {
+        "path": "::F-08 flood POST /api/user/orders: success is false",
+        "id": "e7448a3382af744384f0cad9c17cfc12",
+        "passes": 18077,
+        "fails": 0,
+        "name": "F-08 flood POST /api/user/orders: success is false"
+      },
+      {
+        "passes": 18077,
+        "fails": 0,
+        "name": "F-08 flood POST /api/user/orders: error object present",
+        "path": "::F-08 flood POST /api/user/orders: error object present",
+        "id": "4c2f78a928d525b24e91d22f6ad9b929"
+      },
+      {
+        "name": "F-08 flood POST /api/user/orders: requestId in error envelope",
+        "path": "::F-08 flood POST /api/user/orders: requestId in error envelope",
+        "id": "355cffbda26c616c634d8f452f21c2bf",
+        "passes": 18077,
+        "fails": 0
+      },
+      {
+        "path": "::F-08 flood POST /api/user/orders: error.code is INSUFFICIENT_STOCK",
+        "id": "632e0c7c24694158e5fc87557db999e0",
+        "passes": 9039,
+        "fails": 0,
+        "name": "F-08 flood POST /api/user/orders: error.code is INSUFFICIENT_STOCK"
+      },
+      {
+        "name": "F-08 flood POST /api/user/orders: error.code is INSUFFICIENT_FUNDS",
+        "path": "::F-08 flood POST /api/user/orders: error.code is INSUFFICIENT_FUNDS",
+        "id": "576414dd6891955dd22315e47774d227",
+        "passes": 9038,
+        "fails": 0
+      }
+    ],
+    "name": "",
+    "path": "",
+    "id": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "options": {
+    "summaryTrendStats": [
+      "min",
+      "avg",
+      "med",
+      "max",
+      "p(90)",
+      "p(95)",
+      "p(99)"
+    ],
+    "summaryTimeUnit": "",
+    "noColor": false
+  },
+  "state": {
+    "isStdOutTTY": true,
+    "isStdErrTTY": true,
+    "testRunDurationMs": 31397.028236
+  }
+}

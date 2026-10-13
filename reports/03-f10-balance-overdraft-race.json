@@ -1,0 +1,328 @@
+{
+  "root_group": {
+    "name": "",
+    "path": "",
+    "id": "d41d8cd98f00b204e9800998ecf8427e",
+    "groups": [
+      {
+        "name": "teardown",
+        "path": "::teardown",
+        "id": "a8a9942382e8ffe2e56ef29e664b8229",
+        "groups": [],
+        "checks": [
+            {
+              "fails": 0,
+              "name": "F-10 Overdraft Invariant: final balance == 0.00 (never negative)",
+              "path": "::teardown::F-10 Overdraft Invariant: final balance == 0.00 (never negative)",
+              "id": "cc7719e7fc6dc195579eacc3e8897859",
+              "passes": 1
+            },
+            {
+              "name": "F-10 Overdraft Invariant: final stock_quantity == 97",
+              "path": "::teardown::F-10 Overdraft Invariant: final stock_quantity == 97",
+              "id": "5c0f0579f84cff7db0bdf8a4810ee914",
+              "passes": 1,
+              "fails": 0
+            }
+          ]
+      }
+    ],
+    "checks": [
+      {
+        "name": "F-10 overdraft 201: status is PROCESSED",
+        "path": "::F-10 overdraft 201: status is PROCESSED",
+        "id": "3416701395804586cf9ce140eab241d5",
+        "passes": 3,
+        "fails": 0
+      },
+      {
+        "path": "::F-10 overdraft: no 500 error",
+        "id": "70e4a25aadd79a4d127f2c74c958b61d",
+        "passes": 50,
+        "fails": 0,
+        "name": "F-10 overdraft: no 500 error"
+      },
+      {
+        "passes": 50,
+        "fails": 0,
+        "name": "F-10 overdraft: status is 201 or 422 INSUFFICIENT_FUNDS",
+        "path": "::F-10 overdraft: status is 201 or 422 INSUFFICIENT_FUNDS",
+        "id": "fb7409311bb761a90091d7160fedf9b8"
+      }
+    ]
+  },
+  "options": {
+    "summaryTrendStats": [
+      "min",
+      "avg",
+      "med",
+      "max",
+      "p(90)",
+      "p(95)",
+      "p(99)"
+    ],
+    "summaryTimeUnit": "",
+    "noColor": false
+  },
+  "state": {
+    "isStdOutTTY": true,
+    "isStdErrTTY": true,
+    "testRunDurationMs": 630.827313
+  },
+  "metrics": {
+    "iteration_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "med": 73.56554299999999,
+        "max": 112.113259,
+        "p(90)": 104.9278597,
+        "p(95)": 108.54669005,
+        "p(99)": 111.70237048,
+        "min": 12.519466,
+        "avg": 70.71249384
+      }
+    },
+    "iterations": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 50,
+        "rate": 79.26099420492277
+      }
+    },
+    "checks": {
+      "values": {
+        "rate": 1,
+        "passes": 105,
+        "fails": 0
+      },
+      "type": "rate",
+      "contains": "default"
+    },
+    "http_req_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "max": 215.39406,
+        "p(90)": 106.1374068,
+        "p(95)": 110.9836124,
+        "p(99)": 214.41677095999998,
+        "min": 0.937127,
+        "avg": 70.14526226315789,
+        "med": 68.924277
+      }
+    },
+    "http_req_duration{expected_response:true}": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 0.937127,
+        "avg": 70.14526226315789,
+        "med": 68.924277,
+        "max": 215.39406,
+        "p(90)": 106.1374068,
+        "p(95)": 110.9836124,
+        "p(99)": 214.41677095999998
+      }
+    },
+    "http_req_receiving": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(95)": 0.11863439999999989,
+        "p(99)": 0.1679467599999999,
+        "min": 0.034381,
+        "avg": 0.059133122807017546,
+        "med": 0.05269,
+        "max": 0.195039,
+        "p(90)": 0.07978299999999998
+      }
+    },
+    "http_req_blocked": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "med": 0.13758,
+        "max": 2.505425,
+        "p(90)": 0.5694351999999999,
+        "p(95)": 0.7774681999999994,
+        "p(99)": 2.268475559999999,
+        "min": 0.003172,
+        "avg": 0.2973448070175439
+      }
+    },
+    "f10_overdraft_5xx_errors": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 0,
+        "rate": 0
+      },
+      "thresholds": {
+        "count == 0": {
+          "ok": true
+        }
+      }
+    },
+    "http_reqs": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 57,
+        "rate": 90.35753339361196
+      }
+    },
+    "f10_overdraft_unexpected_status": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 0,
+        "rate": 0
+      },
+      "thresholds": {
+        "count == 0": {
+          "ok": true
+        }
+      }
+    },
+    "http_req_connecting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 0,
+        "avg": 0.22334545614035095,
+        "med": 0.09128,
+        "max": 2.050228,
+        "p(90)": 0.5037322,
+        "p(95)": 0.7298061999999993,
+        "p(99)": 1.4081605599999976
+      }
+    },
+    "data_sent": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "count": 32636,
+        "rate": 51735.23613743719
+      }
+    },
+    "f10_overdraft_422_insufficient_funds": {
+      "contains": "default",
+      "values": {
+        "count": 47,
+        "rate": 74.5053345526274
+      },
+      "thresholds": {
+        "count == 47": {
+          "ok": true
+        }
+      },
+      "type": "counter"
+    },
+    "http_req_tls_handshaking": {
+      "contains": "time",
+      "values": {
+        "min": 0,
+        "avg": 0,
+        "med": 0,
+        "max": 0,
+        "p(90)": 0,
+        "p(95)": 0,
+        "p(99)": 0
+      },
+      "type": "trend"
+    },
+    "data_received": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "count": 39030,
+        "rate": 61871.132076362715
+      }
+    },
+    "http_req_sending": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 0.12514984210526317,
+        "med": 0.06351,
+        "max": 1.517597,
+        "p(90)": 0.2687314,
+        "p(95)": 0.2972261999999999,
+        "p(99)": 0.8489183599999972,
+        "min": 0.010887
+      }
+    },
+    "http_req_failed": {
+      "contains": "default",
+      "values": {
+        "rate": 0,
+        "passes": 0,
+        "fails": 57
+      },
+      "type": "rate"
+    },
+    "f10_overdraft_invariants_ok": {
+      "contains": "default",
+      "values": {
+        "rate": 1,
+        "passes": 1,
+        "fails": 0
+      },
+      "thresholds": {
+        "rate == 1.0": {
+          "ok": true
+        }
+      },
+      "type": "rate"
+    },
+    "f10_overdraft_201_created": {
+      "values": {
+        "rate": 4.755659652295367,
+        "count": 3
+      },
+      "thresholds": {
+        "count == 3": {
+          "ok": true
+        }
+      },
+      "type": "counter",
+      "contains": "default"
+    },
+    "http_req_waiting": {
+      "contains": "time",
+      "values": {
+        "p(90)": 106.01635479999999,
+        "p(95)": 110.86785139999999,
+        "p(99)": 214.31123211999997,
+        "min": 0.863671,
+        "avg": 69.96097929824565,
+        "med": 68.847414,
+        "max": 215.320981
+      },
+      "type": "trend"
+    }
+  },
+  "setup_data": {
+    "adminToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDEiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaXNzIjoid2FyZWhvdXNlLWFwaSIsImF1ZCI6WyJ3YXJlaG91c2UtY2xpZW50cyJdLCJleHAiOjE3OTE5NTk3MjAsImlhdCI6MTc5MTg3MzMyMH0.AB7aFW1_dnaHVN_OPCWzZLS0xW0ug9BWwZz8cnpiWbE",
+    "product": {
+      "updated_at": "2026-10-13T06:35:20.133369Z",
+      "category": "smartphone",
+      "created_at": "2026-10-13T06:35:20.133369Z",
+      "id": "d84a83f6-5ef6-45ff-a29f-7d0237a15513",
+      "manufacturer": "Apple",
+      "model": "k6_f10_overdraft_prod_1c8c781a8c8c",
+      "price": 100,
+      "stock_quantity": 100
+    },
+    "user": {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiZjQ2ZGZlMS02N2M0LTQ1MTMtOGM2ZC1jOWU3YzgwZWNjOGIiLCJ1c2VybmFtZSI6Ims2X2YxMF9vdmVyZHJhZnRfdXNlcl8xMTU5MjE0NDYyMWQiLCJyb2xlIjoidXNlciIsImlzcyI6IndhcmVob3VzZS1hcGkiLCJhdWQiOlsid2FyZWhvdXNlLWNsaWVudHMiXSwiZXhwIjoxNzkxOTU5NzIwLCJpYXQiOjE3OTE4NzMzMjB9.S8mz4wcamjf1U5NwHK945tCczrisjSq7zoGWq3ZLeao",
+      "username": "k6_f10_overdraft_user_11592144621d",
+      "balance": 300,
+      "id": "bf46dfe1-67c4-4513-8c6d-c9e7c80ecc8b",
+      "password": "k6pass123!",
+      "role": "user"
+    }
+  }
+}

@@ -1,0 +1,372 @@
+{
+  "options": {
+    "summaryTrendStats": [
+      "min",
+      "avg",
+      "med",
+      "max",
+      "p(90)",
+      "p(95)",
+      "p(99)"
+    ],
+    "summaryTimeUnit": "",
+    "noColor": false
+  },
+  "state": {
+    "isStdErrTTY": true,
+    "testRunDurationMs": 5606.620437,
+    "isStdOutTTY": true
+  },
+  "metrics": {
+    "data_sent": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "count": 189335,
+        "rate": 33769.89794966568
+      }
+    },
+    "http_req_duration{expected_response:true}": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(99)": 1661.81171795,
+        "min": 0.409037,
+        "avg": 196.22465549289063,
+        "med": 2.8434565000000003,
+        "max": 1684.01978,
+        "p(90)": 1334.1987506000005,
+        "p(95)": 1569.19341925
+      }
+    },
+    "iterations": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 234,
+        "rate": 41.73637267394707
+      }
+    },
+    "br01_bcrypt_login_duration": {
+      "values": {
+        "avg": 1514.2152832600002,
+        "med": 1553.4542849999998,
+        "max": 1684.01978,
+        "p(90)": 1660.7863055,
+        "p(95)": 1664.73250385,
+        "p(99)": 1674.9054419000001,
+        "min": 1118.238337
+      },
+      "type": "trend",
+      "contains": "time"
+    },
+    "http_req_blocked": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "med": 0.010110500000000001,
+        "max": 3.581239,
+        "p(90)": 0.8023902000000022,
+        "p(95)": 1.9447464499999978,
+        "p(99)": 2.7143650100000034,
+        "min": 0.002308,
+        "avg": 0.21459299289099484
+      }
+    },
+    "br01_probe_products_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(95)": 107.12867294999992,
+        "p(99)": 255.0879527199999,
+        "min": 0.957879,
+        "avg": 20.45729131521737,
+        "med": 4.280927,
+        "max": 273.610933,
+        "p(90)": 81.2843468
+      },
+      "thresholds": {
+        "p(95) < 500": {
+          "ok": true
+        }
+      }
+    },
+    "data_received": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "count": 1044885,
+        "rate": 186366.28103169738
+      }
+    },
+    "checks": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "rate": 1,
+        "passes": 1706,
+        "fails": 0
+      }
+    },
+    "http_req_failed": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "rate": 0,
+        "passes": 0,
+        "fails": 422
+      }
+    },
+    "http_req_sending": {
+      "contains": "time",
+      "values": {
+        "min": 0.006451,
+        "avg": 0.04265728909952608,
+        "med": 0.029792,
+        "max": 1.490898,
+        "p(90)": 0.06515920000000007,
+        "p(95)": 0.109299,
+        "p(99)": 0.18828012000000005
+      },
+      "type": "trend"
+    },
+    "vus": {
+      "type": "gauge",
+      "contains": "default",
+      "values": {
+        "value": 5,
+        "min": 5,
+        "max": 55
+      }
+    },
+    "br01_saturation_5xx_errors": {
+      "values": {
+        "count": 0,
+        "rate": 0
+      },
+      "thresholds": {
+        "count == 0": {
+          "ok": true
+        }
+      },
+      "type": "counter",
+      "contains": "default"
+    },
+    "vus_max": {
+      "type": "gauge",
+      "contains": "default",
+      "values": {
+        "value": 55,
+        "min": 55,
+        "max": 55
+      }
+    },
+    "http_req_receiving": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "med": 0.083652,
+        "max": 5.16532,
+        "p(90)": 0.1940931000000001,
+        "p(95)": 0.22343554999999998,
+        "p(99)": 0.337204490000001,
+        "min": 0.016768,
+        "avg": 0.11418089810426546
+      }
+    },
+    "br01_probe_success_rate": {
+      "contains": "default",
+      "values": {
+        "passes": 184,
+        "fails": 0,
+        "rate": 1
+      },
+      "thresholds": {
+        "rate == 1.0": {
+          "ok": true
+        }
+      },
+      "type": "rate"
+    },
+    "http_req_connecting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 0,
+        "avg": 0.1207759218009479,
+        "med": 0,
+        "max": 2.298431,
+        "p(90)": 0.4220970000000004,
+        "p(95)": 0.9865199999999996,
+        "p(99)": 2.0686213100000037
+      }
+    },
+    "http_req_waiting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "med": 2.6691495,
+        "max": 1683.955664,
+        "p(90)": 1333.9628619000005,
+        "p(95)": 1569.15237385,
+        "p(99)": 1661.6664825999999,
+        "min": 0.372932,
+        "avg": 196.06781730568733
+      }
+    },
+    "http_reqs": {
+      "contains": "default",
+      "values": {
+        "count": 422,
+        "rate": 75.26815926669087
+      },
+      "type": "counter"
+    },
+    "iteration_duration": {
+      "contains": "time",
+      "values": {
+        "avg": 432.15848639316204,
+        "med": 108.7786745,
+        "max": 1686.195613,
+        "p(90)": 1559.1358122000001,
+        "p(95)": 1633.03429645,
+        "p(99)": 1667.49698814,
+        "min": 101.770993
+      },
+      "type": "trend"
+    },
+    "br01_probe_orders_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(95)": 64.67872524999983,
+        "p(99)": 342.5767425999995,
+        "min": 0.409037,
+        "avg": 15.440441722826082,
+        "med": 1.7776585,
+        "max": 381.276682,
+        "p(90)": 17.2407071
+      },
+      "thresholds": {
+        "p(95) < 500": {
+          "ok": true
+        }
+      }
+    },
+    "http_req_duration": {
+      "values": {
+        "max": 1684.01978,
+        "p(90)": 1334.1987506000005,
+        "p(95)": 1569.19341925,
+        "p(99)": 1661.81171795,
+        "min": 0.409037,
+        "avg": 196.22465549289063,
+        "med": 2.8434565000000003
+      },
+      "type": "trend",
+      "contains": "time"
+    },
+    "http_req_tls_handshaking": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 0,
+        "avg": 0,
+        "med": 0,
+        "max": 0,
+        "p(90)": 0,
+        "p(95)": 0,
+        "p(99)": 0
+      }
+    }
+  },
+  "setup_data": {
+    "adminToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDEiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaXNzIjoid2FyZWhvdXNlLWFwaSIsImF1ZCI6WyJ3YXJlaG91c2UtY2xpZW50cyJdLCJleHAiOjE3OTE5NTk3NDcsImlhdCI6MTc5MTg3MzM0N30.ARHLHge3xBxFi_OIjEPMyywXD9Ogsy-o0LWCFQWfxh0",
+    "user": {
+      "balance": 1000,
+      "id": "44bb60b8-acdb-4db5-86c8-a3887300a123",
+      "password": "k6pass123!",
+      "role": "user",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NGJiNjBiOC1hY2RiLTRkYjUtODZjOC1hMzg4NzMwMGExMjMiLCJ1c2VybmFtZSI6Ims2X2JyMDFfZG9zX3VzZXJfM2EyMTRhMWRjYjJhIiwicm9sZSI6InVzZXIiLCJpc3MiOiJ3YXJlaG91c2UtYXBpIiwiYXVkIjpbIndhcmVob3VzZS1jbGllbnRzIl0sImV4cCI6MTc5MTk1OTc0OCwiaWF0IjoxNzkxODczMzQ4fQ.5_E8IQsQ2wAIMqU472yqcB-PDY-9SbjwLUFFP8he-6g",
+      "username": "k6_br01_dos_user_3a214a1dcb2a"
+    }
+  },
+  "root_group": {
+    "name": "",
+    "path": "",
+    "id": "d41d8cd98f00b204e9800998ecf8427e",
+    "groups": [],
+    "checks": [
+        {
+          "fails": 0,
+          "name": "BR-01 probe GET /api/user/products: status is 200",
+          "path": "::BR-01 probe GET /api/user/products: status is 200",
+          "id": "9e189afa69d4f814c02a7d027f3e978e",
+          "passes": 184
+        },
+        {
+          "name": "BR-01 probe GET /api/user/products: success is true",
+          "path": "::BR-01 probe GET /api/user/products: success is true",
+          "id": "7a0744abb8074741e8ef9576649e1eb5",
+          "passes": 184,
+          "fails": 0
+        },
+        {
+          "name": "BR-01 probe GET /api/user/products: data is array",
+          "path": "::BR-01 probe GET /api/user/products: data is array",
+          "id": "c9747000be50b663381e94c3fef37da9",
+          "passes": 184,
+          "fails": 0
+        },
+        {
+          "path": "::BR-01 probe GET /api/user/products: pagination metadata valid",
+          "id": "38bc7e5d2d4d921d995a3ed7fb2629ad",
+          "passes": 184,
+          "fails": 0,
+          "name": "BR-01 probe GET /api/user/products: pagination metadata valid"
+        },
+        {
+          "id": "c269931dd16a0002972ec391acee5aa7",
+          "passes": 184,
+          "fails": 0,
+          "name": "BR-01 probe GET /api/user/orders: status is 200",
+          "path": "::BR-01 probe GET /api/user/orders: status is 200"
+        },
+        {
+          "path": "::BR-01 probe GET /api/user/orders: success is true",
+          "id": "9831f9a5ed51792ad01b004fa4f45059",
+          "passes": 184,
+          "fails": 0,
+          "name": "BR-01 probe GET /api/user/orders: success is true"
+        },
+        {
+          "name": "BR-01 probe GET /api/user/orders: data payload present",
+          "path": "::BR-01 probe GET /api/user/orders: data payload present",
+          "id": "1f521d00156a1a77e5a92ff6daf2e220",
+          "passes": 184,
+          "fails": 0
+        },
+        {
+          "path": "::BR-01 probe GET /api/user/orders: requestId in envelope",
+          "id": "83acee4fec6c99500c59dec0374b7574",
+          "passes": 184,
+          "fails": 0,
+          "name": "BR-01 probe GET /api/user/orders: requestId in envelope"
+        },
+        {
+          "id": "883edeea4b91b6a9a68752c8a11787e2",
+          "passes": 184,
+          "fails": 0,
+          "name": "BR-01 probe GET /api/user/orders: X-Request-ID header present",
+          "path": "::BR-01 probe GET /api/user/orders: X-Request-ID header present"
+        },
+        {
+          "name": "BR-01 login flood: returns 401 (no 5xx)",
+          "path": "::BR-01 login flood: returns 401 (no 5xx)",
+          "id": "0c72db516d59b0b318dddd35c000b7cc",
+          "passes": 50,
+          "fails": 0
+        }
+      ]
+  }
+}

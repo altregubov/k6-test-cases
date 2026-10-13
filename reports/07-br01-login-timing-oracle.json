@@ -1,0 +1,353 @@
+{
+  "root_group": {
+    "checks": [
+      {
+        "name": "BR-01 non-existent user wrong password: status is 401",
+        "path": "::BR-01 non-existent user wrong password: status is 401",
+        "id": "b6e3d9c38257d919ef88f065fa1a3178",
+        "passes": 15,
+        "fails": 0
+      },
+      {
+        "name": "BR-01 non-existent user wrong password: success is false",
+        "path": "::BR-01 non-existent user wrong password: success is false",
+        "id": "afa54ccfd41c7203618386b48e4d69fd",
+        "passes": 15,
+        "fails": 0
+      },
+      {
+        "name": "BR-01 non-existent user wrong password: error object present",
+        "path": "::BR-01 non-existent user wrong password: error object present",
+        "id": "ebdcb94991598e69e71ab019ee16375d",
+        "passes": 15,
+        "fails": 0
+      },
+      {
+        "name": "BR-01 non-existent user wrong password: requestId in error envelope",
+        "path": "::BR-01 non-existent user wrong password: requestId in error envelope",
+        "id": "79ef4809a0d9bdcda7b8ddd71b513143",
+        "passes": 15,
+        "fails": 0
+      },
+      {
+        "passes": 15,
+        "fails": 0,
+        "name": "BR-01 non-existent user wrong password: error.code is INVALID_CREDENTIALS",
+        "path": "::BR-01 non-existent user wrong password: error.code is INVALID_CREDENTIALS",
+        "id": "97c17f56cfdf6e7a951fc6cbb1a6dee8"
+      },
+      {
+        "name": "BR-01 existing user wrong password: status is 401",
+        "path": "::BR-01 existing user wrong password: status is 401",
+        "id": "fbbb7aa9f42e69e83ffca59207820e79",
+        "passes": 15,
+        "fails": 0
+      },
+      {
+        "name": "BR-01 existing user wrong password: success is false",
+        "path": "::BR-01 existing user wrong password: success is false",
+        "id": "e33c02e49f7b6f3ffcd430c071261733",
+        "passes": 15,
+        "fails": 0
+      },
+      {
+        "name": "BR-01 existing user wrong password: error object present",
+        "path": "::BR-01 existing user wrong password: error object present",
+        "id": "cbc2ffe15be64d77e254585972c78fe1",
+        "passes": 15,
+        "fails": 0
+      },
+      {
+        "fails": 0,
+        "name": "BR-01 existing user wrong password: requestId in error envelope",
+        "path": "::BR-01 existing user wrong password: requestId in error envelope",
+        "id": "60fd96e1c926015c86868dba60447580",
+        "passes": 15
+      },
+      {
+        "name": "BR-01 existing user wrong password: error.code is INVALID_CREDENTIALS",
+        "path": "::BR-01 existing user wrong password: error.code is INVALID_CREDENTIALS",
+        "id": "fd2db151bc5654d9572ae5208e85242f",
+        "passes": 15,
+        "fails": 0
+      }
+    ],
+    "name": "",
+    "path": "",
+    "id": "d41d8cd98f00b204e9800998ecf8427e",
+    "groups": []
+  },
+  "options": {
+    "summaryTrendStats": [
+      "min",
+      "avg",
+      "med",
+      "max",
+      "p(90)",
+      "p(95)",
+      "p(99)"
+    ],
+    "summaryTimeUnit": "",
+    "noColor": false
+  },
+  "state": {
+    "testRunDurationMs": 1647.362304,
+    "isStdOutTTY": true,
+    "isStdErrTTY": true
+  },
+  "metrics": {
+    "checks": {
+      "contains": "default",
+      "values": {
+        "rate": 1,
+        "passes": 150,
+        "fails": 0
+      },
+      "type": "rate"
+    },
+    "http_req_sending": {
+      "values": {
+        "med": 0.014844,
+        "max": 0.059095,
+        "p(90)": 0.0437895,
+        "p(95)": 0.05786955,
+        "p(99)": 0.058732,
+        "min": 0.010022,
+        "avg": 0.02027602941176471
+      },
+      "type": "trend",
+      "contains": "time"
+    },
+    "data_sent": {
+      "values": {
+        "count": 8994,
+        "rate": 5459.636886288737
+      },
+      "type": "counter",
+      "contains": "data"
+    },
+    "vus": {
+      "type": "gauge",
+      "contains": "default",
+      "values": {
+        "value": 3,
+        "min": 3,
+        "max": 3
+      }
+    },
+    "iterations": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 30,
+        "rate": 18.210930241123204
+      }
+    },
+    "http_reqs": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 34,
+        "rate": 20.639054273272965
+      }
+    },
+    "http_req_receiving": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "max": 0.099454,
+        "p(90)": 0.0696457,
+        "p(95)": 0.07275294999999998,
+        "p(99)": 0.09212206000000003,
+        "min": 0.0245,
+        "avg": 0.048691441176470576,
+        "med": 0.043567999999999996
+      }
+    },
+    "http_req_tls_handshaking": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(99)": 0,
+        "min": 0,
+        "avg": 0,
+        "med": 0,
+        "max": 0,
+        "p(90)": 0,
+        "p(95)": 0
+      }
+    },
+    "http_req_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 142.09196864705885,
+        "med": 140.061865,
+        "max": 243.171264,
+        "p(90)": 227.1982085,
+        "p(95)": 239.00945545,
+        "p(99)": 242.20253151,
+        "min": 1.950527
+      }
+    },
+    "http_req_waiting": {
+      "values": {
+        "p(99)": 242.12012812,
+        "min": 1.881584,
+        "avg": 142.0230011764706,
+        "med": 139.965044,
+        "max": 243.08011,
+        "p(90)": 227.14197620000002,
+        "p(95)": 238.89893235
+      },
+      "type": "trend",
+      "contains": "time"
+    },
+    "http_req_blocked": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 0.002201,
+        "avg": 0.13195670588235295,
+        "med": 0.003421,
+        "max": 0.811457,
+        "p(90)": 0.6424452999999998,
+        "p(95)": 0.77273025,
+        "p(99)": 0.8039399300000001
+      }
+    },
+    "vus_max": {
+      "contains": "default",
+      "values": {
+        "value": 6,
+        "min": 6,
+        "max": 6
+      },
+      "type": "gauge"
+    },
+    "br01_login_waiting_nonexistent_user": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "max": 64.275754,
+        "p(90)": 63.5318666,
+        "p(95)": 63.8599155,
+        "p(99)": 64.1925863,
+        "min": 60.809549,
+        "avg": 62.79150806666666,
+        "med": 63.087758
+      },
+      "thresholds": {
+        "med >= 180": {
+          "ok": false
+        }
+      }
+    },
+    "http_req_connecting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(95)": 0.7264033,
+        "p(99)": 0.7619734300000001,
+        "min": 0,
+        "avg": 0.10119188235294117,
+        "med": 0,
+        "max": 0.772015,
+        "p(90)": 0.40233669999999994
+      }
+    },
+    "br01_uniform_401_response_rate": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "fails": 0,
+        "rate": 1,
+        "passes": 30
+      },
+      "thresholds": {
+        "rate == 1.0": {
+          "ok": true
+        }
+      }
+    },
+    "br01_login_waiting_existing_user": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "med": 221.732163,
+        "max": 243.08011,
+        "p(90)": 239.3882176,
+        "p(95)": 241.0437848,
+        "p(99)": 242.67284496,
+        "min": 219.7992,
+        "avg": 225.6089762
+      },
+      "thresholds": {
+        "med > 20": {
+          "ok": true
+        }
+      }
+    },
+    "br01_timing_5xx_errors": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 0,
+        "rate": 0
+      },
+      "thresholds": {
+        "count == 0": {
+          "ok": true
+        }
+      }
+    },
+    "http_req_duration{expected_response:true}": {
+      "values": {
+        "med": 140.061865,
+        "max": 243.171264,
+        "p(90)": 227.1982085,
+        "p(95)": 239.00945545,
+        "p(99)": 242.20253151,
+        "min": 1.950527,
+        "avg": 142.09196864705885
+      },
+      "type": "trend",
+      "contains": "time"
+    },
+    "iteration_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 61.047185,
+        "avg": 144.6075017333333,
+        "med": 142.6285395,
+        "max": 244.209706,
+        "p(90)": 229.39755150000002,
+        "p(95)": 240.390051,
+        "p(99)": 243.33802574
+      }
+    },
+    "http_req_failed": {
+      "contains": "default",
+      "values": {
+        "rate": 0,
+        "passes": 0,
+        "fails": 34
+      },
+      "type": "rate"
+    },
+    "data_received": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "count": 12229,
+        "rate": 7423.382197289856
+      }
+    }
+  },
+  "setup_data": {
+    "adminToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAwMDEiLCJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6ImFkbWluIiwiaXNzIjoid2FyZWhvdXNlLWFwaSIsImF1ZCI6WyJ3YXJlaG91c2UtY2xpZW50cyJdLCJleHAiOjE3OTE5NTk3NDQsImlhdCI6MTc5MTg3MzM0NH0.wOD1JKJprZWTNK8WDuVh1IKxcxpY4OQwRYqwZbInK1c",
+    "existingUsername": "k6_br01_timing_user_7e64067bf0e2",
+    "userId": "772996cd-a3f7-4a6a-8608-d674f5dc2ea7"
+  }
+}
